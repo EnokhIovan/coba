@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyuba Boy</title>
+    <link rel="stylesheet" href="style/login.css">
+    <link rel="stylesheet" href="style/home.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            position: relative;
+            min-height: 100vh;
+            background-image: url('https://github.com/EnokhIovan/nyubaRek/blob/main/clasroomImg.jpg?raw=true');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            overflow: hidden;
+        }
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* background-color: red; */
+            backdrop-filter: blur(3px);
+            background-color: rgba(0, 0, 0, 0.1);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <section id="login">
+        <header>
+            <h1 id="loginTitle">To Do Task <br>Program</h1>
+        </header>
+        <main>
+            <h2 id="loginTrigger">Klik Untuk Masuk!</h2>
+        </main>
+    </section>
+    
+    <section id="home">
+        <header>
+            <h1>My List Template</h1>
+        </header>
+        <main>
+            <div class="container">
+                <div class="templateContainer">
+                    <!-- <div class="templateCard"></div>
+                    <div class="templateCard"></div> -->
+                    <div class="templateCard">
+                        <h1>Title ki Jeh</h1>
+                        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, a. Nemo nam eum modi. Nulla repellat accusantium cupiditate nobis dolor, in, accusamus molestiae rerum veritatis obcaecati, ut reiciendis necessitatibus suscipit!</h2>
+                        <div class="templateCardSetting">
+                            <img src="img/edit.png">
+                            <div class="divider"></div>
+                            <img src="img/hide.png">
+                            <div class="divider"></div>
+                            <img src="img/bin.png">
+                        </div>
+                    </div>
+                    <div class="templateCard">
+                        <h1>Title ki Jeh</h1>
+                        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, a. Nemo nam eum modi. Nulla repellat accusantium cupiditate nobis dolor, in, accusamus molestiae rerum veritatis obcaecati, ut reiciendis necessitatibus suscipit!</h2>
+                        <div class="templateCardSetting">
+                            <img src="img/edit.png">
+                            <div class="divider"></div>
+                            <img src="img/hide.png">
+                            <div class="divider"></div>
+                            <img src="img/bin.png">
+                        </div>
+                    </div>
+                    <div class="templateCard">
+                        <h1>Title ki Jeh</h1>
+                        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, a. Nemo nam eum modi. Nulla repellat accusantium cupiditate nobis dolor, in, accusamus molestiae rerum veritatis obcaecati, ut reiciendis necessitatibus suscipit!</h2>
+                        <div class="templateCardSetting">
+                            <img src="img/edit.png">
+                            <div class="divider"></div>
+                            <img src="img/hide.png">
+                            <div class="divider"></div>
+                            <img src="img/bin.png">
+                        </div>
+                    </div>
+                    <div id='c4CNT' class="templateCard">
+                        <h1>+</h1>
+                        <p>Add New Template</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </section>
+    
+    <script src="script/login.js"></script>
+    <script src="script/home.js"></script>
+    <script>
+        // localStorage.clear()
+        
+        const loginPage = document.getElementById('login');
+        const homePage = document.getElementById('home');
+        
+        /* Function */
+        function LSSet(name, value){
+            localStorage.setItem(name, JSON.stringify(value));
+        }
+        function LSGet(name){
+            const getItem = localStorage.getItem(name);
+            return (getItem && getItem !== "undefined") ? JSON.parse(getItem) : null;
+        }
+        function LSDel(name){
+            localStorage.removeItem(name);
+        }
+        function blackAllSection(except){
+            document.querySelectorAll('section').forEach(sec => {
+                sec.style.display = 'none';
+            })
+            document.getElementById(except).style.display = 'flex';
+            LSSet('userLastSection', except);
+        }
+        function checkSession(){
+            if(!LSGet('userEnteredState')){
+                blackAllSection('login');
+            } else if(LSGet('userLastActive')){
+                let expiredCalc = Date.now() - parseInt(LSGet('userLastActive'), 10);
+                if(expiredCalc < expiredTime){
+                    blackAllSection(LSGet('userLastSection'));
+                } else {
+                    blackAllSection('login');
+                }
+            }
+        }
+
+        /* Debugging */
+        setInterval(() => {
+            let text = '';
+            for(a=0; a<localStorage.length; a++){
+                const key = localStorage.key(a);
+                const keyItem = LSGet(key);
+                text += `${key}: ${keyItem}`
+                if(a !== localStorage.length -1){
+                    text += '\n';
+                }
+            }
+            console.log(text);
+        }, 500)
+
+        /* System*/
+        document.addEventListener('DOMContentLoaded', () => {
+            checkSession();
+        })
+    </script>
+</body>
+</html>
