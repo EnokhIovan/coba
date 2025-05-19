@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nyuba Boy</title>
+    <title>Walahi</title>
     <link rel="stylesheet" href="style/login.css">
     <link rel="stylesheet" href="style/home.css">
     <style>
@@ -48,31 +48,7 @@
         </header>
         <main>
             <div class="container">
-                <div class="templateContainer">
-                    <!-- <div class="templateCard"></div>
-                    <div class="templateCard"></div> -->
-                    <div class="templateCard">
-                        <h1>Title ki Jeh</h1>
-                        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, a. Nemo nam eum modi. Nulla repellat accusantium cupiditate nobis dolor, in, accusamus molestiae rerum veritatis obcaecati, ut reiciendis necessitatibus suscipit!</h2>
-                        <div class="templateCardSetting">
-                            <img src="img/edit.png">
-                            <div class="divider"></div>
-                            <img src="img/hide.png">
-                            <div class="divider"></div>
-                            <img src="img/bin.png">
-                        </div>
-                    </div>
-                    <div class="templateCard">
-                        <h1>Title ki Jeh</h1>
-                        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, a. Nemo nam eum modi. Nulla repellat accusantium cupiditate nobis dolor, in, accusamus molestiae rerum veritatis obcaecati, ut reiciendis necessitatibus suscipit!</h2>
-                        <div class="templateCardSetting">
-                            <img src="img/edit.png">
-                            <div class="divider"></div>
-                            <img src="img/hide.png">
-                            <div class="divider"></div>
-                            <img src="img/bin.png">
-                        </div>
-                    </div>
+                <div id="t4NC" class="templateContainer">
                     <div class="templateCard">
                         <h1>Title ki Jeh</h1>
                         <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, a. Nemo nam eum modi. Nulla repellat accusantium cupiditate nobis dolor, in, accusamus molestiae rerum veritatis obcaecati, ut reiciendis necessitatibus suscipit!</h2>
@@ -90,9 +66,40 @@
                     </div>
                 </div>
             </div>
+            <div class="formContainer">
+                <div class="formBox">
+                    <header>
+                        <h1>Template Baru</h1>
+                    </header>
+                    <input id="datInTitle" name="Judul" placeholder="Judul Template">
+                    <div class="themeBox">
+                        <p>Tema: </p>
+                        <select id="datInTheme">
+                            <!-- Dinamikal Option -->
+                        </select>
+                    </div>
+                    <p>Deskripsi: </p>
+                    <textarea id="datInDescription" name="Description" rows="5" placeholder="Deskripsi Template" style="width: 80%"></textarea>
+                    <div class="btnForm">
+                        <button id="cancelForm">Kembali</button>
+                        <button id="resetForm">Reset</button>
+                        <button id="addForm">Tambahkan</button>
+                    </div>
+                </div>
+                <div class="warnFormContainer">
+                    <div class="warnBox">
+                        <h1>Yakin untuk Kembali?</h1>
+                        <p>Jika anda kembali, progress yang sudah anda kerjakan akan hilang!</p>
+                        <div class="btnWarn">
+                            <button id="cancelWarn">Tidak</button>
+                            <button id="nextWarn">Ya</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
         <footer>
-
+            <!-- <p>AwikawikawikAwikawukAWok</p> -->
         </footer>
     </section>
     
@@ -122,19 +129,18 @@
             document.getElementById(except).style.display = 'flex';
             LSSet('userLastSection', except);
         }
-        function checkSession(){
-            if(!LSGet('userEnteredState')){
-                blackAllSection('login');
-            } else if(LSGet('userLastActive')){
-                let expiredCalc = Date.now() - parseInt(LSGet('userLastActive'), 10);
-                if(expiredCalc < expiredTime){
-                    blackAllSection(LSGet('userLastSection'));
-                } else {
-                    blackAllSection('login');
-                }
-            }
-        }
-
+        
+        /* System*/
+        document.addEventListener('DOMContentLoaded', () => {
+            checkSession();
+        })
+        
+        /* Up To Date */
+        setInterval(() => {
+            gapSys();       //home.js
+            formBtnSys();   //home.js
+        }, 500)
+        
         /* Debugging */
         setInterval(() => {
             let text = '';
@@ -148,11 +154,6 @@
             }
             console.log(text);
         }, 500)
-
-        /* System*/
-        document.addEventListener('DOMContentLoaded', () => {
-            checkSession();
-        })
     </script>
 </body>
 </html>
