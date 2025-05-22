@@ -16,9 +16,11 @@
     flex: 1.5;
     max-height: 15%;
     font-size: clamp(24px, 4vw, 36px);
+    border-bottom-left-radius: 32px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    user-select: none;
 }
 #home > header > h1 {
     margin: 0;
@@ -42,7 +44,6 @@
     /* background-color: green; */
     flex: 7.5;
     max-height: 75%;
-    padding: 10px;
     box-sizing: border-box;
 }
 #home > main .templateCard h1,
@@ -57,25 +58,59 @@
 #home > main > .container {
     /* background-color: aquamarine; */
     box-sizing: border-box;
-    padding: 4px;
+    padding: 8px;
     height: 100%;
+    overflow: auto;
+    user-select: none;
+}
+#home > main > .container > .createdCardTitle,
+#home > main > .container > .hidedCardTitle {
+    margin: 0;
+    color: white;
+    margin-left: 16px;
+    text-shadow: 0 0 8px black;
+    position: relative;
+}
+#home > main > .container > .hidedCardTitle {
+    margin-top: 8px;
+}
+#home > main > .container > .createdCardTitle::after,
+#home > main > .container > .hidedCardTitle::after {
+    content: var(--card-count);
+    font-size: clamp(16px, 5vw, 18px);
+    text-shadow: 0 0 8px black;
+    margin-left: 8px;
+    position: absolute;
+    top: 0;
+    color: gold;
+}
+#home > main > .container::-webkit-scrollbar {
+    background-color: rgba(35, 35, 35, 0.6);
+    width: 8px;
+    border-radius: 8px;
+}
+#home > main > .container::-webkit-scrollbar-thumb {
+    background-color: rgba(70, 70, 70, 0.8);
+    border-radius: 8px;
 }
 #home > main .templateContainer {
-    /* background-color: red; */
-    max-height: 100%;
-    display: flex;
-    /* justify-content: space-evenly; */
-    /* gap: 8px; */
-    flex-wrap: wrap;
-    overflow-y: auto;
     --minGap: 8px;
     --scrollbarWidth: 6px;
+    background-color: rgba(35, 35, 35, 0.8);
+    max-height: 80%;
+    display: flex;
+    padding: 4px 0;
+    border-radius: 8px;
+    border: 2px solid whitesmoke;
+    /* justify-content: space-evenly; */
+    gap: 8px;
+    flex-wrap: wrap;
+    overflow-y: auto;
 }
 #home > main .templateContainer::-webkit-scrollbar {
     background-color: rgba(70, 70, 70, 0.4);
     width: var(--scrollbarWidth);
     border-radius: 12px;
-
 }
 #home > main .templateCard {
     --borderWidth: 2px;
@@ -91,11 +126,11 @@
     border: var(--borderWidth) solid white;
     box-shadow: 0 0 4px white;
     flex-shrink: 0;
-    cursor: pointer;
     user-select: none;
 }
 #home > main .templateCard#c4CNT {
     justify-content: center;
+    cursor: pointer;
 }
 #home > main .templateCard:not(#c4CNT) > h1 {
     width: 100%;
@@ -128,7 +163,7 @@
 }
 #home > main .templateCard:not(#c4CNT) > .templateCardSetting {
     /* background-color:darkcyan; */
-    /* max-height: 25%; */
+    max-height: 25%;
     width: 100%;
     position: relative;
     display: flex;
@@ -156,8 +191,15 @@
     cursor: pointer;
     transition: 0.2s;
 }
-#home > main .templateCard:not(#c4CNT) > .templateCardSetting > img:hover {
-    background-color: rgba(60, 60, 60, 0.6);
+#home > main .templateCard:not(#c4CNT) > .templateCardSetting > img#edit:hover {
+    background-color: rgb(50, 200, 50);
+}
+#home > main .templateCard:not(#c4CNT) > .templateCardSetting > img#hide:hover,
+#home > main .templateCard:not(#c4CNT) > .templateCardSetting > img#show:hover {
+    background-color: rgb(60, 60, 255);
+}
+#home > main .templateCard:not(#c4CNT) > .templateCardSetting > img#bin:hover {
+    background-color: rgb(255, 60, 60);
 }
 #home > main .templateCard:not(#c4CNT) > .templateCardSetting > .divider {
     background-color: grey;
@@ -283,49 +325,49 @@
     font-weight: bold;
     /* flex: 1; */
 }
-#home > main .btnForm > button#cancelForm {
+#home > main .btnForm > button#formCclBtn {
     background-color: rgba(255, 0, 0, 0.8);;
     color: rgba(255, 255, 255, 1);
-    text-shadow: 0 0 6px rgba(128, 128, 128, 1);
+    text-shadow: 0 0 6px rgba(0, 0, 0, 1);
 }
-#home > main .btnForm > button#cancelForm:hover,
+#home > main .btnForm > button#formCclBtn:hover,
 #home > main .warnFormContainer > .warnBox .btnWarn > button#cancelWarn:hover {
     background-color: rgba(255, 0, 0, 0.4);
     color: rgba(255, 255, 255, 0.6);
-    text-shadow: 0 0 6px rgba(128, 128, 128, 0.6);
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
     cursor: pointer;
 }
-#home > main .btnForm > button#resetForm {
+#home > main .btnForm > button#formRstBtn {
     background-color: rgba(64, 224, 208, 0.2);
     color: rgba(255, 255, 255, 0.4);
     text-shadow: 0 0 0 transparent;
 }
-#home > main .btnForm > button#resetForm.valid {
+#home > main .btnForm > button#formRstBtn.valid {
     background-color: rgba(64, 224, 208, 0.8);
     color: rgba(255, 255, 255, 1);
-    text-shadow: 0 0 6px rgba(128, 128, 128, 1);
+    text-shadow: 0 0 6px rgba(0, 0, 0, 1);
     cursor: pointer;
 }
-#home > main .btnForm > button#resetForm.valid:hover {
+#home > main .btnForm > button#formRstBtn.valid:hover {
     background-color: rgba(64, 224, 208, 0.4);
     color: rgba(255, 255, 255, 0.6);
-    text-shadow: 0 0 6px rgba(128, 128, 128, 0.6);
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
 }
-#home > main .btnForm > button#addForm {
+#home > main .btnForm > button#formAddBtn {
     background-color: rgba(154, 205, 50, 0.2);
     color: rgba(255, 255, 255, 0.4);
     text-shadow: 0 0 0 transparent;
 }
-#home > main .btnForm > button#addForm.valid {
+#home > main .btnForm > button#formAddBtn.valid {
     background-color: rgba(154, 205, 50, 0.8);
     color: rgba(255, 255, 255, 1);
-    text-shadow: 0 0 6px rgba(128, 128, 128, 1);
+    text-shadow: 0 0 6px rgba(0, 0, 0, 1);
 }
-#home > main .btnForm > button#addForm.valid:hover,
+#home > main .btnForm > button#formAddBtn.valid:hover,
 #home > main .warnFormContainer > .warnBox .btnWarn > button#nextWarn:hover {
     background-color: rgba(154, 205, 50, 0.4);
     color: rgba(255, 255, 255, 0.6);
-    text-shadow: 0 0 6px rgba(128, 128, 128, 0.6);
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
     cursor: pointer;
 }
 /* Warn Form Container */
@@ -343,7 +385,7 @@
 }
 #home > main .warnFormContainer > .warnBox {
     background-color: rgb(35, 35, 35);
-    width: clamp(200px, 30vw, 350px);
+    width: clamp(250px, 30vw, 350px);
     padding: 12px;
     border-radius: 12px;
     border: 2px solid white;
