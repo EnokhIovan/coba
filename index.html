@@ -44,32 +44,49 @@
     
     <section id="home">
         <header>
-            <h1>My List Template</h1>
+            <h1>My List Card</h1>
         </header>
         <main>
             <div class="container">
+                <h1 class="createdCardTitle">Created Card</h1>
                 <div id="t4NC" class="templateContainer">
-                    <div class="templateCard">
-                        <h1>Title ki Jeh</h1>
-                        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, a. Nemo nam eum modi. Nulla repellat accusantium cupiditate nobis dolor, in, accusamus molestiae rerum veritatis obcaecati, ut reiciendis necessitatibus suscipit!</h2>
+                    <!-- PREVIEW -->
+                    <!-- <div class="templateCard">
+                        <h1 id="cardTitle">Title ki Jeh</h1>
+                        <h2 id="cardDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, a. Nemo nam eum modi. Nulla repellat accusantium cupiditate nobis dolor, in, accusamus molestiae rerum veritatis obcaecati, ut reiciendis necessitatibus suscipit!</h2>
                         <div class="templateCardSetting">
-                            <img src="img/edit.png">
+                            <img id="edit" src="img/edit.png">
                             <div class="divider"></div>
-                            <img src="img/hide.png">
+                            <img id="hide" src="img/hide.png">
                             <div class="divider"></div>
-                            <img src="img/bin.png">
+                            <img id="bin" src="img/bin.png">
                         </div>
                     </div>
                     <div id='c4CNT' class="templateCard">
                         <h1>+</h1>
-                        <p>Add New Template</p>
-                    </div>
+                        <p>Tambahkan Kartu Baru</p>
+                    </div> -->
+                </div>
+
+                <h1 class="hidedCardTitle">Hided Card</h1>
+                <div id="t4HC">
+                    <!-- <div class="templateCard">
+                        <h1 id="cardTitle">Title ki Jeh</h1>
+                        <h2 id="cardDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, a. Nemo nam eum modi. Nulla repellat accusantium cupiditate nobis dolor, in, accusamus molestiae rerum veritatis obcaecati, ut reiciendis necessitatibus suscipit!</h2>
+                        <div class="templateCardSetting">
+                            <img id="edit" src="img/edit.png">
+                            <div class="divider"></div>
+                            <img id="hide" src="img/hide.png">
+                            <div class="divider"></div>
+                            <img id="bin" src="img/bin.png">
+                        </div>
+                    </div> -->
                 </div>
             </div>
             <div class="formContainer">
                 <div class="formBox">
                     <header>
-                        <h1>Template Baru</h1>
+                        <h1 id="formBoxTitle">Kartu Baru</h1>
                     </header>
                     <input id="datInTitle" name="Judul" placeholder="Judul Template">
                     <div class="themeBox">
@@ -81,9 +98,9 @@
                     <p>Deskripsi: </p>
                     <textarea id="datInDescription" name="Description" rows="5" placeholder="Deskripsi Template" style="width: 80%"></textarea>
                     <div class="btnForm">
-                        <button id="cancelForm">Kembali</button>
-                        <button id="resetForm">Reset</button>
-                        <button id="addForm">Tambahkan</button>
+                        <button id="formCclBtn">Kembali</button>
+                        <button id="formRstBtn">Reset</button>
+                        <button id="formAddBtn">Tambahkan</button>
                     </div>
                 </div>
                 <div class="warnFormContainer">
@@ -103,8 +120,6 @@
         </footer>
     </section>
     
-    <script src="script/login.js"></script>
-    <script src="script/home.js"></script>
     <script>
         // localStorage.clear()
         
@@ -133,13 +148,12 @@
         /* System*/
         document.addEventListener('DOMContentLoaded', () => {
             checkSession();
+            loadUserProgress();
+            if(LSGet('userHidedCardTemplate')){
+                hidedContainerSys();
+            }
+            cardCountSys();
         })
-        
-        /* Up To Date */
-        setInterval(() => {
-            gapSys();       //home.js
-            formBtnSys();   //home.js
-        }, 500)
         
         /* Debugging */
         setInterval(() => {
@@ -153,6 +167,18 @@
                 }
             }
             console.log(text);
+        }, 500)
+    </script>
+    <script src="script/login.js"></script>
+    <script src="script/home.js"></script>
+    <script>
+        /* Up To Date */
+        setInterval(() => {
+            // gapSys();               //home.js
+            formBtnSys();           //home.js
+            maxHeightSys();         //home.js
+            hidedContainerSys();    //home.js
+            cardCountSys();
         }, 500)
     </script>
 </body>
